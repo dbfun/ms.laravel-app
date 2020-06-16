@@ -10,7 +10,7 @@ const axios = require("axios");
 const os = require("os");
 const inDocker = os.hostname() === "test";
 const port = inDocker ? 80 : parseInt(process.env.MS_PORT_PUBLIC);
-const host = inDocker ? "openresty-app" : process.env.MS_HOST_PUBLIC;
+const host = inDocker ? "nginx" : process.env.MS_HOST_PUBLIC;
 
 assert.notEqual(port, NaN, "specify public port via environment, e.g.: MS_HOST_PUBLIC=localhost MS_PORT_PUBLIC=8087 npm run test");
 assert.notEqual(host, NaN, "specify public host via environment, e.g.: MS_HOST_PUBLIC=localhost MS_PORT_PUBLIC=8087 npm run test");

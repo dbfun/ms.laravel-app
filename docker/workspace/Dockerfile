@@ -1351,6 +1351,9 @@ bindkey "^?" backward-delete-char\n' >> /home/laradock/.zshrc \
 
 USER root
 
+# Speed up
+RUN composer global require hirak/prestissimo
+
 #
 #--------------------------------------------------------------------------
 # Final Touch

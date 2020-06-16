@@ -17,3 +17,7 @@ services:
       - ./src:/var/www
 #    ports:
 #      - "${WORKSPACE_SSH_PORT}:22"
+
+  test:
+    volumes:
+      - ./test/test:/srv/test

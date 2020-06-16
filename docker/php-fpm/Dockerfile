@@ -944,6 +944,8 @@ ENV LC_ALL ${LOCALE}
 RUN curl --silent --show-error https://getcomposer.org/installer | php && \
     mv composer.phar /usr/local/bin/composer
 
+RUN composer global require hirak/prestissimo
+
 WORKDIR /var/www
 
 ARG LARADOCK_PHP_VERSION
