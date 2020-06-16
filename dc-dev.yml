@@ -1,0 +1,6 @@
+services:
+
+  nginx:
+    volumes:
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+      - ./src:/var/www

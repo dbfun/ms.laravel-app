@@ -1,0 +1,23 @@
+version: "3.8"
+
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
+
+services:
+
+  nginx:
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    hostname: nginx
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - ${MS_PORT_PUBLIC}:80
+    networks:
+      - frontend
+      - backend

@@ -1,0 +1,13 @@
+{
+  "name": "us-skeleton-test",
+  "version": "0.0.1",
+  "description": "us-skeleton tests",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Ilya Vagun",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2"
+  }
+}
