@@ -41,6 +41,11 @@ reload: nginx-reload
 nginx-reload:
 	@docker-compose exec nginx sh -c 'nginx -s reload'
 
+# Php reload
+.PHONY: php-reload
+php-reload:
+	@docker-compose exec php-fpm sh -c 'kill 1'
+
 #################################
 # Test & debug
 #################################

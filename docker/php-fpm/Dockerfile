@@ -947,6 +947,11 @@ COPY ./docker/php-fpm/php${LARADOCK_PHP_VERSION}.ini /usr/local/etc/php/php.ini
 
 WORKDIR /var/www
 
+RUN curl --silent --show-error https://getcomposer.org/installer | php && \
+    mv composer.phar /usr/local/bin/composer
+
+RUN cd /var/www/laravel-app && ./install.sh
+
 CMD ["php-fpm"]
 
 EXPOSE 9000

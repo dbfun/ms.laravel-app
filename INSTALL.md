@@ -1,0 +1,4 @@
+```
+make rebuild
+./install.sh
+```

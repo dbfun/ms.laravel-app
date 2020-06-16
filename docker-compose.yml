@@ -30,6 +30,7 @@ services:
       dockerfile: ./docker/php-fpm/Dockerfile
       args:
         - LARADOCK_PHP_VERSION=${PHP_VERSION}
+    restart: always
     extra_hosts:
       - "dockerhost:${DOCKER_HOST_IP}"
     environment:
