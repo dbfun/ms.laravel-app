@@ -940,15 +940,15 @@ RUN if [ ${INSTALL_FAKETIME} = true ]; then \
 ARG LOCALE=POSIX
 ENV LC_ALL ${LOCALE}
 
-ARG LARADOCK_PHP_VERSION
-RUN env
-COPY ./src /var/www
-COPY ./docker/php-fpm/php${LARADOCK_PHP_VERSION}.ini /usr/local/etc/php/php.ini
+# Install composer & deps
+RUN curl --silent --show-error https://getcomposer.org/installer | php && \
+    mv composer.phar /usr/local/bin/composer
 
 WORKDIR /var/www
 
-RUN curl --silent --show-error https://getcomposer.org/installer | php && \
-    mv composer.phar /usr/local/bin/composer
+ARG LARADOCK_PHP_VERSION
+COPY ./docker/php-fpm/php${LARADOCK_PHP_VERSION}.ini /usr/local/etc/php/php.ini
+COPY ./src /var/www
 
 RUN cd /var/www/laravel-app && ./install.sh
 
