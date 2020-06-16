@@ -1,6 +1,9 @@
 services:
-
   nginx:
     volumes:
       - ./docker/nginx/conf.d:/etc/nginx/conf.d
       - ./src:/var/www
+  php-fpm:
+    volumes:
+      - ./src:/var/www
+      - ./docker/php-fpm/php${PHP_VERSION}.ini:/usr/local/etc/php/php.ini
