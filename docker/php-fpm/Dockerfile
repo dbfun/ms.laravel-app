@@ -952,6 +952,8 @@ COPY ./src /var/www
 
 RUN cd /var/www/laravel-app && ./install.sh
 
+RUN chown -R www-data:www-data /var/www
+
 CMD ["php-fpm"]
 
 EXPOSE 9000
