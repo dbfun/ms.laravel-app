@@ -2,7 +2,7 @@
 # Application workflow
 #################################
 
-SERVICES=nginx
+SERVICES=nginx workspace
 
 # Mount dev volumes and port forwarding for development
 docker-compose-dev.yml: docker-compose.yml dc-dev.yml
@@ -44,6 +44,11 @@ nginx-reload:
 #################################
 # Test & debug
 #################################
+
+# Nginx reload
+.PHONY: workspace
+workspace:
+	@docker-compose exec --user=laradock workspace zsh
 
 # Healthcheck
 .PHONY: nginx-healthcheck
