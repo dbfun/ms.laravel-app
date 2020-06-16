@@ -1349,10 +1349,10 @@ bindkey "^[[6~" down-line-or-history\n\
 bindkey "^?" backward-delete-char\n' >> /home/laradock/.zshrc \
 ;fi
 
-USER root
-
 # Speed up
 RUN composer global require hirak/prestissimo
+
+USER root
 
 #
 #--------------------------------------------------------------------------

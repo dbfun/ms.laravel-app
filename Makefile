@@ -26,7 +26,8 @@ rebuild: docker-compose-dev.yml
 # Test
 .PHONY: test
 test: up docker-compose-dev.yml
-	@docker-compose -f docker-compose-dev.yml up --build test
+#	@docker-compose -f docker-compose-dev.yml up --build test
+	@docker-compose -f docker-compose-dev.yml up test
 
 # Restart
 .PHONY: restart

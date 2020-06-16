@@ -15,6 +15,8 @@ services:
   workspace:
     volumes:
       - ./src:/var/www
+# TODO как-то хранить кеш, но в таком виде он монтируется как root
+#      - ${DATA_PATH_HOST}/composer-cache:/home/laradock/.composer/cache
 #    ports:
 #      - "${WORKSPACE_SSH_PORT}:22"
 
