@@ -2,7 +2,7 @@
 # Application workflow
 #################################
 
-SERVICES=nginx workspace
+SERVICES=nginx mysql workspace
 
 # Mount dev volumes and port forwarding for development
 docker-compose-dev.yml: docker-compose.yml dc-dev.yml

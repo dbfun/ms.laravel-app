@@ -23,6 +23,7 @@ services:
       - backend
     depends_on:
       - php-fpm
+      - mysql
 
   php-fpm:
     build:
@@ -30,6 +31,7 @@ services:
       dockerfile: ./docker/php-fpm/Dockerfile
       args:
         - LARADOCK_PHP_VERSION=${PHP_VERSION}
+    command: /bin/sh -c "cd /var/www/laravel-app && php artisan migrate && php-fpm"
     restart: always
     extra_hosts:
       - "dockerhost:${DOCKER_HOST_IP}"
@@ -40,10 +42,30 @@ services:
       - LARADOCK_PHP_VERSION=${PHP_VERSION}
     depends_on:
       - workspace
+      - mysql
     networks:
       - backend
     links:
       - docker-in-docker
+
+  mysql:
+    build:
+      context: .
+      dockerfile: ./docker/mysql/Dockerfile
+      args:
+        - MYSQL_VERSION=${MYSQL_VERSION}
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - TZ=${WORKSPACE_TIMEZONE}
+    volumes:
+      - ${DATA_PATH_HOST}/mysql:/var/lib/mysql
+      - ./docker/mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    restart: always
+    networks:
+      - backend
 
   docker-in-docker:
     image: docker:dind
@@ -60,6 +82,8 @@ services:
       args:
         - LARADOCK_PHP_VERSION=${PHP_VERSION}
         - SHELL_OH_MY_ZSH=${SHELL_OH_MY_ZSH}
+        - TZ=${WORKSPACE_TIMEZONE}
+        - INSTALL_MYSQL_CLIENT=${WORKSPACE_INSTALL_MYSQL_CLIENT}
     extra_hosts:
       - "dockerhost:${DOCKER_HOST_IP}"
     tty: true
